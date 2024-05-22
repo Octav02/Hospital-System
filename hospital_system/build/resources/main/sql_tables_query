@@ -1,0 +1,31 @@
+create table users(
+    id bigint primary key auto_increment,
+    first_name varchar(255),
+    last_name varchar(255),
+    cnp varchar(14),
+    passwrod varchar(255),
+    user_type varchar(255)
+);
+
+create table drugs(
+    id bigint primary key  auto_increment,
+    name varchar(255),
+    stock int,
+    contraindications varchar(255)
+);
+
+create table prescriptions(
+    id bigint primary key auto_increment,
+    user_id bigint,
+    status varchar(255),
+    foreign key (user_id) references users(id)
+);
+
+create table prescription_details(
+    prescription_id bigint,
+    drug_id bigint,
+    quantity int,
+    primary key (prescription_id,drug_id),
+    foreign key (prescription_id) references prescriptions(id),
+    foreign key (drug_id) references drugs(id)
+)
