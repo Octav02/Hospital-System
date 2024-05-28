@@ -88,7 +88,7 @@ public class LoginController {
             Parent root = fxmlLoader.getRoot();
             stage.setScene(new javafx.scene.Scene(root));
             AdministratorController administratorController = fxmlLoader.getController();
-            administratorController.setService(service);
+            administratorController.setService(service, service.getUserByUsername(usernameTextField.getText()).getId());
             stage.show();
         } catch (Exception e) {
             showError("Could not open administrator view");

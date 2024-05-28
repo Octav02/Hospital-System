@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 import ro.mpp2024.hospital_system.dto.PrescriptionDTO;
 import ro.mpp2024.hospital_system.model.Drug;
 import ro.mpp2024.hospital_system.model.Prescription;
@@ -129,6 +130,11 @@ public class DoctorController implements Observer {
             prescriptionDetails.removeIf(prescriptionDetail -> prescriptionDetail.getDrugId().equals(service.findDrugByName(prescriptionDTO.getMedicineName()).getId()));
         }
 
-        //TODO: initModel?
+    }
+
+    public void handleLogOut(ActionEvent actionEvent) {
+        service.logOut(doctorId);
+        Stage stage = (Stage) medicineTableView.getScene().getWindow();
+        stage.close();
     }
 }

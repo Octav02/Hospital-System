@@ -5,23 +5,22 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ro.mpp2024.hospital_system.controller.PharmacyController">
    <children>
-      <TableView fx:id="prescriptionTableView" layoutX="14.0" layoutY="14.0" prefHeight="307.0" prefWidth="200.0">
+      <TableView fx:id="prescriptionTableView" layoutX="15.0" layoutY="35.0" prefHeight="307.0" prefWidth="108.0">
         <columns>
-          <TableColumn fx:id="prescriptionIdTableColumn" prefWidth="89.0" text="Prescription ID" />
-          <TableColumn fx:id="doctorTableColumn" prefWidth="108.0" text="Doctor" />
+          <TableColumn fx:id="prescriptionIdTableColumn" prefWidth="106.66668701171875" text="Prescription ID" />
         </columns>
       </TableView>
-      <TableView fx:id="prescriptionDetailsTableView" layoutX="232.0" layoutY="14.0" prefHeight="307.0" prefWidth="320.0">
+      <TableView fx:id="prescriptionDetailsTableView" layoutX="178.0" layoutY="35.0" prefHeight="307.0" prefWidth="375.0">
         <columns>
           <TableColumn fx:id="medicineTableColumn" prefWidth="66.0" text="Medicine" />
           <TableColumn fx:id="quantityTableColumn" prefWidth="84.0" text="Quantity" />
-            <TableColumn fx:id="DoctorTableColumn" prefWidth="75.0" text="Doctor" />
+            <TableColumn fx:id="doctorTableColumn" prefWidth="75.0" text="Doctor" />
             <TableColumn fx:id="informationTableColumn" prefWidth="94.0" text="Information" />
         </columns>
       </TableView>
-      <Button layoutX="188.0" layoutY="343.0" mnemonicParsing="false" onAction="#handleFillPrescription" text="Fill Prescription" />
+      <Button layoutX="162.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleFillPrescription" text="Fill Prescription" />
+      <Button layoutX="507.0" layoutY="361.0" mnemonicParsing="false" onAction="#handleLogOut" text="Logout" />
    </children>
 </AnchorPane>

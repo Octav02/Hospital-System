@@ -21,11 +21,13 @@ public class AdministratorController implements Observer {
     private Service service;
 
     private ObservableList<Drug> drugsModels = FXCollections.observableArrayList();
+    private long userId;
 
-    public void setService(Service service) {
+    public void setService(Service service, Long id) {
         this.service = service;
         service.addObserver(this);
         initModel();
+        this.userId = id;
     }
 
     private void initModel() {
@@ -54,6 +56,7 @@ public class AdministratorController implements Observer {
     }
 
     public void handleLogOut(ActionEvent actionEvent) {
+        service.logOut(userId);
         Stage stage = (Stage) drugTableView.getScene().getWindow();
         stage.close();
     }

@@ -26,5 +26,6 @@
       <TextField fx:id="quantityTextField" layoutX="76.0" layoutY="321.0" onKeyPressed="#handleAddDrugToPrescription" />
       <Button layoutX="242.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleCreatePrescription" text="Create Prescription" />
       <Button layoutX="422.0" layoutY="321.0" mnemonicParsing="false" onAction="#handleRemoveDrugFromPrescription" text="Remove" />
+      <Button layoutX="496.0" layoutY="355.0" mnemonicParsing="false" onAction="#handleLogOut" text="Logout" />
    </children>
 </AnchorPane>

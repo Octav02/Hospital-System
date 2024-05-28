@@ -57,4 +57,9 @@ public class PrescriptionDBRepository implements PrescriptionRepository {
                 .setParameter("userId", userId)
                 .list();
     }
+
+    @Override
+    public Iterable<Prescription> findAllPending() {
+        return HibernateUtils.getSessionFactory().openSession().createQuery("from Prescription where status = 0", Prescription.class).list();
+    }
 }
