@@ -41,13 +41,43 @@ public class LoginController {
                 handleGoToAdministratorView();
                 break;
             case DOCTOR:
-                System.out.println("Go to doctor view");
+                handleGoToDoctorView();
                 break;
             case PHARMACY:
-                System.out.println("Go to pharmacy view");
+                handleGoToPharmacyView();
                 break;
         }
 
+    }
+
+    private void handleGoToPharmacyView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ro/mpp2024/hospital_system/pharmacy-view.fxml"));
+            fxmlLoader.load();
+            Stage stage = new Stage();
+            Parent root = fxmlLoader.getRoot();
+            stage.setScene(new javafx.scene.Scene(root));
+            PharmacyController pharmacyController = fxmlLoader.getController();
+            pharmacyController.setService(service, service.getUserByUsername(usernameTextField.getText()).getId());
+            stage.show();
+        } catch (Exception e) {
+            showError("Could not open pharmacy view");
+        }
+    }
+
+    private void handleGoToDoctorView() {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("/ro/mpp2024/hospital_system/doctor-view.fxml"));
+            fxmlLoader.load();
+            Stage stage = new Stage();
+            Parent root = fxmlLoader.getRoot();
+            stage.setScene(new javafx.scene.Scene(root));
+            DoctorController doctorController = fxmlLoader.getController();
+            doctorController.setService(service, service.getUserByUsername(usernameTextField.getText()).getId());
+            stage.show();
+        } catch (Exception e) {
+            showError("Could not open administrator view");
+        }
     }
 
     private void handleGoToAdministratorView() {
@@ -86,5 +116,6 @@ public class LoginController {
         alert.setTitle("Error");
         alert.setHeaderText("Error");
         alert.setContentText(message);
+        alert.show();
     }
 }

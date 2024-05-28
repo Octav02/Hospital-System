@@ -8,21 +8,23 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import ro.mpp2024.hospital_system.model.Drug;
 import ro.mpp2024.hospital_system.service.Service;
+import ro.mpp2024.hospital_system.utils.observer.Observer;
 
-public class AdministratorController {
+public class AdministratorController implements Observer {
     public TableView<Drug> drugTableView;
     public TableColumn<Drug, String> drugNameTableColumn;
     public TextField nameTextField;
     public TextArea contraindicationsTextField;
     public TextField quantityTextField;
-    public TableColumn<Drug,String>  drugContraindicationsTableColumn;
-    public TableColumn<Drug,Integer> drugStockTableColumn;
+    public TableColumn<Drug, String> drugContraindicationsTableColumn;
+    public TableColumn<Drug, Integer> drugStockTableColumn;
     private Service service;
 
     private ObservableList<Drug> drugsModels = FXCollections.observableArrayList();
 
     public void setService(Service service) {
         this.service = service;
+        service.addObserver(this);
         initModel();
     }
 
@@ -34,9 +36,9 @@ public class AdministratorController {
     }
 
     public void initialize() {
-        drugNameTableColumn.setCellValueFactory(new PropertyValueFactory<Drug,String>("name"));
-        drugContraindicationsTableColumn.setCellValueFactory(new PropertyValueFactory<Drug,String>("contraindications"));
-        drugStockTableColumn.setCellValueFactory(new PropertyValueFactory<Drug,Integer>("stock"));
+        drugNameTableColumn.setCellValueFactory(new PropertyValueFactory<Drug, String>("name"));
+        drugContraindicationsTableColumn.setCellValueFactory(new PropertyValueFactory<Drug, String>("contraindications"));
+        drugStockTableColumn.setCellValueFactory(new PropertyValueFactory<Drug, Integer>("stock"));
         setUpTableSelectionListener();
 
     }
@@ -68,8 +70,7 @@ public class AdministratorController {
                 service.addDrug(name, contraindications, quantity);
             }
             initModel();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             showError("Invalid input");
         }
     }
@@ -81,8 +82,7 @@ public class AdministratorController {
             int quantity = Integer.parseInt(quantityTextField.getText());
             service.updateDrug(name, contraindications, quantity);
             initModel();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             showError("No drug selected");
         }
     }
@@ -93,8 +93,7 @@ public class AdministratorController {
             service.deleteDrug(drug.getName());
             drugsModels.remove(drug);
             initModel();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             showError("No drug selected");
         }
     }
@@ -104,5 +103,11 @@ public class AdministratorController {
         alert.setTitle("Error");
         alert.setHeaderText("Error");
         alert.setContentText(message);
+        alert.show();
+    }
+
+    @Override
+    public void update() {
+        initModel();
     }
 }

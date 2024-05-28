@@ -74,5 +74,6 @@ public class SignUpController {
         alert.setTitle("Error");
         alert.setHeaderText("Error");
         alert.setContentText(message);
+        alert.show();
     }
 }

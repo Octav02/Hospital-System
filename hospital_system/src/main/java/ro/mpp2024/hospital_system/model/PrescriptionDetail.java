@@ -1,16 +1,21 @@
 package ro.mpp2024.hospital_system.model;
 
 import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import javafx.util.Pair;
 
 import java.io.Serializable;
 
+@Entity
 @Table(name = "prescription_details")
 public class PrescriptionDetail implements Identifiable<Pair<Long,Long>>, Serializable {
 
+    @Id
     @Column(name = "prescription_id")
     private Long prescriptionId;
+    @Id
     @Column(name = "drug_id")
     private Long drugId;
     @Column(name = "quantity")
@@ -36,6 +41,11 @@ public class PrescriptionDetail implements Identifiable<Pair<Long,Long>>, Serial
         this.prescriptionId = prescriptionId;
         this.drugId = drugId;
         this.quantity = quantity;
+    }
+
+    public PrescriptionDetail(Long drugId, int quantity) {
+        this.quantity = quantity;
+        this.drugId = drugId;
     }
 
     public PrescriptionDetail(Pair<Long, Long> id, int quantity) {
